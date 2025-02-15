@@ -1,0 +1,22 @@
+git config --global user.name miguelpiras
+git config --global user.email miguelpiras08@gmail.com
+
+dotnet new sln --name Projeto3DS
+dotnet new mvc -o Projeto3DS
+dotnet sln add Projeto3DS\Projeto3DS.csproj
+
+cd Projeto3DS
+
+dotnet watch run
+
+dotnet add package Microsoft.EntityFrameworkCore --version 9.0.1
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 9.0.1
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 9.0.1
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore --version 9.0.1
+dotnet add package MySql.EntityFrameworkCore --version 9.0.0
+
+Criar a camada de dados (criar as classes na models)
+    Categoria
+    Produto
+    ProdutoFoto
+    Usuario
