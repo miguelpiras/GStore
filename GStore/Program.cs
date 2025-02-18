@@ -22,7 +22,12 @@ builder.Services.AddIdentity<Usuario, IdentityRole>(
 
 var app = builder.Build();
 
-// Garantir
+// Garantir que o banco exista ao executar o projeto
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await dbContext.Database.EnsureCreatedAsync();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
