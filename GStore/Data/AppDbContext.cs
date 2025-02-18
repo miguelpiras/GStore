@@ -60,5 +60,27 @@ namespace GStore.Data;
         password.HashPassword(usuario, "123456");
         builder.Entity<Usuario>().HasData(usuario);
         #endregion
+
+        #region Popular Perfil
+        List<IdentityRole> perfis = new()
+        {
+            new() {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Administrador",
+                NormalizedName = "ADMINISTRADOR"
+            },
+            new() {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Funcionário",
+                NormalizedName = "FUNCIONÁRIO"
+            },
+            new() {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Cliente",
+                NormalizedName = "CLIENTE"
+            }
+        };
+        builder.Entity<IdentityRole>().HasData(perfis);
+        #endregion
     }
 }
