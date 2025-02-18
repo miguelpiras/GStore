@@ -1,7 +1,16 @@
+using GStore.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Serviço de Conexão com o Banco de Dados
+string conexao = builder.Configuration.GetConnectionString("Projeto3DS");
+builder.Services.AddDbContext<AppDbContext>(
+    options => options.UseMySQL(conexao)
+);
 
 var app = builder.Build();
 
