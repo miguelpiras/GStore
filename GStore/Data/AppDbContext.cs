@@ -82,5 +82,27 @@ namespace GStore.Data;
         };
         builder.Entity<IdentityRole>().HasData(perfis);
         #endregion
+
+        #region Popular Usuario-Perfil
+        List<IdentityUserRole<string>> userRoles = new()
+        {
+            new()
+            {
+                UserId = usuario.Id,
+                RoleId = perfis[0].Id
+            },
+            new()
+            {
+                UserId = usuario.Id,
+                RoleId = perfis[1].Id
+            },
+            new()
+            {
+                UserId = usuario.Id,
+                RoleId = perfis[2].Id
+            }
+        };
+        builder.Entity<IdentityUserRole<string>>().HasData(userRoles);
+        #endregion
     }
 }
