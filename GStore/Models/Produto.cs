@@ -39,4 +39,6 @@ namespace GStore.Models;
         [Range(0, double.MaxValue)]
         [Column(TypeName = "decimal(10,2)")]//00.000.000,00
         public decimal ValorVenda { get; set; }
+
+        public bool Destaque {get; set;} = false;
     }
