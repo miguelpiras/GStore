@@ -3,6 +3,7 @@ using GStore.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Projeto3DS.Data;
 
 namespace GStore.Data;
 
@@ -14,7 +15,7 @@ namespace GStore.Data;
 
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Produto> Produtos { get; set; }
-        public DbSet<ProdutoFoto> ProdutoFoto { get; set; }
+        public DbSet<ProdutoFoto> ProdutoFotos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -30,79 +31,7 @@ namespace GStore.Data;
         builder.Entity<IdentityRoleClaim<string>>().ToTable("perfil_regra");
         #endregion
 
-        #region Popular Categorias
-        List<Categoria> categorias = new() {
-            new() {
-                Id = 1,
-                Nome = "Eletrônicos",
-            },
-            new() {
-                Id = 2,
-                Nome = "Celulares"
-            }
-        };
-        builder.Entity<Categoria>().HasData(categorias);
-        #endregion
+        AppDbSeed seed = new(builder);
 
-        #region Popular Usuario
-        Usuario usuario = new() {
-            Id = Guid.NewGuid().ToString(),
-            UserName = "MarcelliLinda",
-            NormalizedUserName = "MARCELLILINDA",
-            Email = "marcellipetranel@gmail.com",
-            NormalizedEmail = "MARCELLIPETRANEL@GMAIL.COM",
-            EmailConfirmed = true,
-            Nome = "Marcelli Petranel",
-            DataNascimento = DateTime.Parse("19/06/2007"),
-            LockoutEnabled = true
-        };
-        PasswordHasher<Usuario> password = new();
-        password.HashPassword(usuario, "123456");
-        builder.Entity<Usuario>().HasData(usuario);
-        #endregion
-
-        #region Popular Perfil
-        List<IdentityRole> perfis = new()
-        {
-            new() {
-                Id = Guid.NewGuid().ToString(),
-                Name = "Administrador",
-                NormalizedName = "ADMINISTRADOR"
-            },
-            new() {
-                Id = Guid.NewGuid().ToString(),
-                Name = "Funcionário",
-                NormalizedName = "FUNCIONÁRIO"
-            },
-            new() {
-                Id = Guid.NewGuid().ToString(),
-                Name = "Cliente",
-                NormalizedName = "CLIENTE"
-            }
-        };
-        builder.Entity<IdentityRole>().HasData(perfis);
-        #endregion
-
-        #region Popular Usuario-Perfil
-        List<IdentityUserRole<string>> userRoles = new()
-        {
-            new()
-            {
-                UserId = usuario.Id,
-                RoleId = perfis[0].Id
-            },
-            new()
-            {
-                UserId = usuario.Id,
-                RoleId = perfis[1].Id
-            },
-            new()
-            {
-                UserId = usuario.Id,
-                RoleId = perfis[2].Id
-            }
-        };
-        builder.Entity<IdentityUserRole<string>>().HasData(userRoles);
-        #endregion
     }
 }
