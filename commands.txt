@@ -32,3 +32,16 @@ Executar o Xampp e MySql
 Abrir o Terminal:
     cd GStore
     dotnet watch run
+
+
+Gerador de Código AspNetCore:
+    dotnet tool install --global dotnet-aspnet-codegenerator --version 9.0.0
+    fotnet aspnet-codegenerator -h
+
+dotnet aspnet-codegenerator controller -name CategoriasController --model Categoria --dataContext AppDbContext --layout "~/Views/Shared/_LayoutAdmin.cshtml" -outDir Controllers
+
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 9.0.0
+
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 9.0.1
+
+dotnet aspnet-codegenerator controller -name ProdutosController --model Produto --dataContext AppDbContext --layout "~/Views/Shared/_LayoutAdmin.cshtml" -outDir Controllers
