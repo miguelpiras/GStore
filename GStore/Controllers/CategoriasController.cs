@@ -68,7 +68,7 @@ namespace GStore.Controllers
                     string nomeArquivo = categoria.Id + Path.GetExtension(Arquivo.FileName);
                     string caminho = Path.Combine(_host.WebRootPath, "img\\categorias");
                     string novoArquivo = Path.Combine(caminho, nomeArquivo);
-                    using (FileStream stream = new FileStream(novoArquivo, FileMode.Create))
+                    using (var stream = new FileStream(novoArquivo, FileMode.Create))
                     {
                         Arquivo.CopyTo(stream);
                     }
