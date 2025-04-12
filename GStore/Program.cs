@@ -2,6 +2,7 @@ using GStore.Data;
 using GStore.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +17,11 @@ builder.Services.AddDbContext<AppDbContext>(
 
 //Serviço de Gestão de Usuário - Identity
 builder.Services.AddIdentity<Usuario, IdentityRole>(
-    options => options.SignIn.RequireConfirmedEmail = false
-).AddEntityFrameworkStores<AppDbContext>()
+    options => {
+    options.SignIn.RequireConfirmedEmail = false;
+    options.User.RequireUniqueEmail = true;
+})
+.AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
 var app = builder.Build();
